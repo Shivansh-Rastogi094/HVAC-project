@@ -31,3 +31,4 @@ E:\hvac\_e2e-output\HvacConnect.Core.pdb
 E:\hvac\_mapverify-output\HvacConnect.Core.deps.json
 E:\hvac\_mapverify-output\HvacConnect.Core.dll
 E:\hvac\_mapverify-output\HvacConnect.Core.pdb
+D:\TCS ILP Project\Backend\src\HvacConnect.Core\obj\Debug\net8.0\HvacConnect.Core.sourcelink.json

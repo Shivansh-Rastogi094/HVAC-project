@@ -275,3 +275,4 @@ E:\hvac\_mapverify-output\HvacConnect.ConsoleApp.runtimeconfig.json
 E:\hvac\_mapverify-output\HvacConnect.ConsoleApp.dll
 E:\hvac\_mapverify-output\HvacConnect.ConsoleApp.pdb
 D:\TCS ILP Project\Backend\src\HvacConnect.ConsoleApp\bin\Debug\net8.0\appsettings.json
+D:\TCS ILP Project\Backend\src\HvacConnect.ConsoleApp\obj\Debug\net8.0\HvacConnect.ConsoleApp.sourcelink.json

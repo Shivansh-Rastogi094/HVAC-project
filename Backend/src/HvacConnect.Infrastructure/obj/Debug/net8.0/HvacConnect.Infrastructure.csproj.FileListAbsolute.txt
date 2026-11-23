@@ -44,3 +44,4 @@ E:\hvac\_mapverify-output\HvacConnect.Infrastructure.deps.json
 E:\hvac\_mapverify-output\HvacConnect.Infrastructure.runtimeconfig.json
 E:\hvac\_mapverify-output\HvacConnect.Infrastructure.dll
 E:\hvac\_mapverify-output\HvacConnect.Infrastructure.pdb
+D:\TCS ILP Project\Backend\src\HvacConnect.Infrastructure\obj\Debug\net8.0\HvacConnect.Infrastructure.sourcelink.json

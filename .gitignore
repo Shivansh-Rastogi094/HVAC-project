@@ -1,3 +1,7 @@
 Backend/src/HvacConnect.ConsoleApp/appsettings.json
 
 Context
+
+Backend/src/HvacConnect.ConsoleApp/bin
+Backend/src/HvacConnect.Core/bin
+Backend/src/HvacConnect.Infrastructure/bin
