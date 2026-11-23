@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{05749FCE-2CE2-47B5-9278-2DFCBFE81B75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HvacConnect.Core", "src\HvacConnect.Core\HvacConnect.Core.csproj", "{42312DB0-EF9E-4A07-BD20-CA092673CE04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HvacConnect.Infrastructure", "src\HvacConnect.Infrastructure\HvacConnect.Infrastructure.csproj", "{F1CB5E25-0B8B-4DDB-86E4-0DF413A3DEE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HvacConnect.ConsoleApp", "src\HvacConnect.ConsoleApp\HvacConnect.ConsoleApp.csproj", "{771A09F6-0043-4A5E-9046-615FE8EBE499}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42312DB0-EF9E-4A07-BD20-CA092673CE04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42312DB0-EF9E-4A07-BD20-CA092673CE04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42312DB0-EF9E-4A07-BD20-CA092673CE04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42312DB0-EF9E-4A07-BD20-CA092673CE04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1CB5E25-0B8B-4DDB-86E4-0DF413A3DEE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1CB5E25-0B8B-4DDB-86E4-0DF413A3DEE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1CB5E25-0B8B-4DDB-86E4-0DF413A3DEE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1CB5E25-0B8B-4DDB-86E4-0DF413A3DEE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{771A09F6-0043-4A5E-9046-615FE8EBE499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{771A09F6-0043-4A5E-9046-615FE8EBE499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{771A09F6-0043-4A5E-9046-615FE8EBE499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{771A09F6-0043-4A5E-9046-615FE8EBE499}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{42312DB0-EF9E-4A07-BD20-CA092673CE04} = {05749FCE-2CE2-47B5-9278-2DFCBFE81B75}
+		{F1CB5E25-0B8B-4DDB-86E4-0DF413A3DEE0} = {05749FCE-2CE2-47B5-9278-2DFCBFE81B75}
+		{771A09F6-0043-4A5E-9046-615FE8EBE499} = {05749FCE-2CE2-47B5-9278-2DFCBFE81B75}
+	EndGlobalSection
+EndGlobal

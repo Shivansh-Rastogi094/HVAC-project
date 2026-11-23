@@ -1,0 +1,264 @@
+erDiagram
+    %% Core Master Entities
+    VENDORS ||--o{ USERS : "employs (VendorAdmin, Tech)"
+    CANONICAL_CUSTOMERS ||--o{ USERS : "has (EndUser / Facility Mgr)"
+    
+    CANONICAL_CUSTOMERS ||--o{ BRAND_CUSTOMER_ACCOUNTS : "owns"
+    VENDORS ||--o{ BRAND_CUSTOMER_ACCOUNTS : "holds local account"
+
+    CANONICAL_CUSTOMERS ||--o{ SITE_LOCATIONS : "owns"
+    VENDORS ||--o{ SITE_LOCATIONS : "serviced by (primary vendor)"
+    SITE_LOCATIONS ||--o{ SITE_LOCATIONS : "parent campus"
+    SITE_LOCATIONS ||--o{ SITE_LOCATION_HISTORIES : "tracks address/vendor audit"
+
+    SITE_LOCATIONS ||--o{ ASSET_EQUIPMENT : "houses"
+    VENDORS ||--o{ ASSET_EQUIPMENT : "source vendor provenance"
+
+    %% Service Operations & Tickets
+    CANONICAL_CUSTOMERS ||--o{ SERVICE_TICKETS : "raised for"
+    SITE_LOCATIONS ||--o{ SERVICE_TICKETS : "located at"
+    ASSET_EQUIPMENT ||--o{ SERVICE_TICKETS : "subject machine"
+    VENDORS ||--o{ SERVICE_TICKETS : "assigned contractor"
+    USERS ||--o{ SERVICE_TICKETS : "raised by user"
+    USERS ||--o{ SERVICE_TICKETS : "assigned technician"
+
+    SERVICE_TICKETS ||--o{ TICKET_COMMENTS : "has comment thread"
+    USERS ||--o{ TICKET_COMMENTS : "authored by"
+
+    %% Ingestion & Deduplication Pipeline
+    VENDORS ||--o{ IMPORT_JOBS : "uploaded by/for"
+    USERS ||--o{ IMPORT_JOBS : "uploaded by user"
+    IMPORT_JOBS ||--o{ IMPORT_ROWS : "contains staged rows"
+    IMPORT_JOBS ||--o{ DUPLICATE_CANDIDATES : "detected in"
+    IMPORT_ROWS ||--o{ DUPLICATE_CANDIDATES : "source row"
+    CANONICAL_CUSTOMERS ||--o{ DUPLICATE_CANDIDATES : "matched existing customer"
+    USERS ||--o{ DUPLICATE_CANDIDATES : "reviewed by"
+
+    VENDORS ||--o{ VENDOR_ONBOARDING_CHECKLISTS : "tracks onboarding readiness"
+    VENDORS ||--o{ VENDOR_MAPPING_TEMPLATES : "saved column templates"
+
+    %% Table Definitions
+    USERS {
+        int id PK
+        string email UK
+        string password_hash
+        string first_name
+        string last_name
+        string phone_number
+        string role
+        int vendor_id FK
+        int customer_id FK
+        string employee_code
+        string specialisation
+        string availability_status
+        boolean is_active
+        int failed_login_count
+        timestamp lockout_end_at
+        timestamp created_at
+    }
+
+    VENDORS {
+        int id PK
+        string vendor_code UK
+        string brand_name
+        string legal_entity_name
+        string region
+        string primary_contact_name
+        string primary_contact_email
+        string primary_contact_phone
+        string status
+        string onboarding_phase
+        timestamp phase1_approved_at
+        date cutover_date
+        boolean is_active
+        timestamp created_at
+    }
+
+    CANONICAL_CUSTOMERS {
+        int id PK
+        string canonical_code UK
+        string customer_name
+        string normalized_name
+        string customer_type
+        string primary_contact_name
+        string primary_contact_email
+        string primary_contact_phone
+        string billing_address
+        string status
+        boolean is_self_registered
+        timestamp created_at
+    }
+
+    BRAND_CUSTOMER_ACCOUNTS {
+        int id PK
+        int canonical_customer_id FK
+        int vendor_id FK
+        string local_account_number
+        string local_customer_name
+        string contact_email
+        string contact_phone
+        string billing_address
+        string account_status
+        string source_system
+        string row_hash
+        timestamp created_at
+    }
+
+    SITE_LOCATIONS {
+        int id PK
+        string site_code UK
+        int canonical_customer_id FK
+        int primary_vendor_id FK
+        int parent_site_id FK
+        string site_name
+        string site_type
+        string address_line
+        string city
+        string state
+        string postal_code
+        string time_zone
+        string operating_hours
+        string access_instructions
+        boolean is_active
+        timestamp created_at
+    }
+
+    SITE_LOCATION_HISTORIES {
+        bigint id PK
+        int site_location_id FK
+        int changed_by_user_id FK
+        string change_type
+        string previous_values_json
+        string new_values_json
+        string reason_notes
+        timestamp effective_date
+    }
+
+    ASSET_EQUIPMENT {
+        int id PK
+        string asset_tag UK
+        int site_location_id FK
+        string category
+        string manufacturer
+        string model_number
+        string serial_number
+        string refrigerant_type
+        date install_date
+        date warranty_end_date
+        string status
+        int source_vendor_id FK
+        string legacy_asset_id
+        timestamp created_at
+    }
+
+    SERVICE_TICKETS {
+        int id PK
+        string ticket_number UK
+        int canonical_customer_id FK
+        int site_location_id FK
+        int asset_equipment_id FK
+        int vendor_id FK
+        int raised_by_user_id FK
+        int assigned_technician_id FK
+        string title
+        string description
+        string priority
+        string status
+        timestamp scheduled_start_at
+        timestamp responded_at
+        timestamp target_response_at
+        timestamp target_resolution_at
+        string sla_state
+        timestamp resolved_at
+        timestamp closed_at
+        string resolution_notes
+        uint concurrency_token
+        timestamp created_at
+    }
+
+    TICKET_COMMENTS {
+        int id PK
+        int ticket_id FK
+        int author_user_id FK
+        string comment_type
+        string comment_text
+        boolean is_internal_only
+        timestamp created_at
+    }
+
+    IMPORT_JOBS {
+        int id PK
+        string job_code UK
+        int vendor_id FK
+        string entity_type
+        string original_file_name
+        bigint file_size_bytes
+        int uploaded_by_user_id FK
+        smallint current_stage
+        int total_rows
+        int valid_rows
+        int warning_rows
+        int error_rows
+        int duplicate_rows
+        string status
+        string mapping_config_json
+        timestamp created_at
+    }
+
+    IMPORT_ROWS {
+        bigint id PK
+        int import_job_id FK
+        int row_number
+        string raw_data_json
+        string mapped_data_json
+        string normalized_name
+        string row_hash
+        string validation_status
+        string validation_issues_json
+        string match_outcome
+        boolean is_processed
+    }
+
+    DUPLICATE_CANDIDATES {
+        int id PK
+        string duplicate_code UK
+        int import_job_id FK
+        bigint import_row_id FK
+        int candidate_vendor_id FK
+        string candidate_name
+        string email
+        string phone
+        string account_number
+        string address
+        int existing_canonical_customer_id FK
+        smallint confidence_score
+        string confidence_level
+        string match_reason
+        string decision
+        string review_notes
+        int reviewed_by_user_id FK
+        timestamp reviewed_at
+        timestamp created_at
+    }
+
+    VENDOR_ONBOARDING_CHECKLISTS {
+        int id PK
+        int vendor_id FK
+        string phase
+        string task_description
+        int sort_order
+        boolean is_completed
+        int completed_by_user_id FK
+        timestamp completed_at
+    }
+
+    VENDOR_MAPPING_TEMPLATES {
+        int id PK
+        int vendor_id FK
+        string entity_type
+        string template_name
+        string mapping_config_json
+        int created_by_user_id FK
+        timestamp created_at
+    }
+

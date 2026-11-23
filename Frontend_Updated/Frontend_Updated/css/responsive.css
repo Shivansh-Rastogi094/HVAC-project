@@ -1,0 +1,48 @@
+/* Responsive adjustments for larger screens (desktop / laptop) */
+@media (min-width: 768px) {
+  /* Main app layout – keep sidebar and content side by side */
+  .app {
+    grid-template-areas:
+      "topbar topbar"
+      "sidebar main";
+    grid-template-columns: 240px 1fr; /* slightly narrower sidebar */
+    grid-template-rows: 60px 1fr;
+  }
+
+  .sidebar {
+    display: block;
+  }
+
+  .content {
+    padding: 24px 32px;
+    max-width: 1200px; /* keep content from stretching too far */
+    margin: 0 auto;
+  }
+
+  /* Form groups – limit width for better readability */
+  .form-group {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Mobile adjustments – keep existing behavior */
+@media (max-width: 767px) {
+  .app {
+    grid-template-areas:
+      "topbar"
+      "main";
+    grid-template-columns: 1fr;
+    grid-template-rows: 60px 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .content {
+    padding: 16px;
+  }
+}
+

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HVAC Connect | Sign In & Authentication</title>
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/design-system.css">
+</head>
+
+<body class="auth-view">
+
+    <div class="auth-container">
+
+        <!-- LEFT BRAND PANEL -->
+        <section class="brand-panel">
+            <div class="logo">
+                HVAC <span>CONNECT</span>
+            </div>
+
+            <div class="brand-content">
+                <h1>Commercial HVAC & Refrigeration Platform</h1>
+                <p>
+                    Unify vendor data, monitor real-time SLA countdowns, and manage field service operations across
+                    acquired brands.
+                </p>
+                <ul class="brand-features">
+                    <li><span>✓</span> Two-phase acquisition data onboarding</li>
+                    <li><span>✓</span> Contract-aware SLA watchdog & dispatching</li>
+                    <li><span>✓</span> Centralized HVAC & refrigeration asset registry</li>
+                    <li><span>✓</span> Role-tailored dashboards for coordinators & technicians</li>
+                </ul>
+            </div>
+
+            <div class="brand-footer">
+                <span>© 2026 HVAC Connect LLC</span>
+                <span>Sprint 1 · Prototype v1.0</span>
+            </div>
+        </section>
+
+        <!-- RIGHT FORM PANEL -->
+        <section class="form-panel">
+
+            <div id="alertBox" class="alert-box alert-error hidden"></div>
+            <a class="auth-home-link" href="index.html">← Back to Home</a>
+
+            <!-- 1. LOGIN VIEW -->
+            <div id="loginView">
+                <div class="form-heading">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to your HVAC Connect workspace.</p>
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">Work Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="e.g. admin@hvacconnect.com" required
+                            autocomplete="email">
+                        <small id="loginEmailMsg"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <label for="loginPassword" style="margin-bottom: 0;">Password</label>
+                            <a href="#" id="togglePasswordBtn"
+                                style="font-size: 11px; color: #555; text-decoration: none;">Show</a>
+                        </div>
+                        <input type="password" id="loginPassword" placeholder="Enter your password" required
+                            autocomplete="current-password">
+                    </div>
+
+                    <div class="form-options">
+                        
+                        <a href="#" id="showForgotPassword">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="primary-btn">
+                        Sign In to Workspace
+                    </button>
+                </form>
+
+                <div class="switch-link">
+                    Need a new account?
+                    <a href="#" id="showSignup">Create account</a>
+                </div>
+
+            </div>
+
+            <!-- 2. SIGNUP VIEW -->
+            <div id="signupView" class="hidden">
+                <div class="form-heading">
+                    <h2>Create Your Account</h2>
+                    <p>Register for access to the HVAC Connect platform.</p>
+                </div>
+
+                <form id="signupForm">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" placeholder="e.g. Alex Henderson" required>
+                        <small id="nameValidationMsg" style="color:red;"></small>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="signupEmail">Work Email Address</label>
+
+                        <input type="email" id="signupEmail" placeholder="name@company.com" required>
+
+                        <small id="emailValidationMsg"></small>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="signupPassword">
+                            Password
+                        </label>
+
+                        <input type="password" id="signupPassword" placeholder="Create a strong password" required>
+
+                        <div class="password-policy">
+
+                            <div id="ruleLength">
+                                ✗ Minimum 8 Characters
+                            </div>
+
+                            <div id="ruleUpper">
+                                ✗ One Uppercase Letter
+                            </div>
+
+                            <div id="ruleLower">
+                                ✗ One Lowercase Letter
+                            </div>
+
+                            <div id="ruleNumber">
+                                ✗ One Number
+                            </div>
+
+                            <div id="ruleSpecial">
+                                ✗ One Special Character
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <input type="password" id="confirmPassword" placeholder="Re-enter your password" required>
+
+                        <small id="confirmPasswordMsg"></small>
+
+                    </div>
+
+                    <label class="terms">
+                        <input type="checkbox" required>
+                        <span>I accept the platform Terms of Service, Confidentiality Agreements, and Privacy
+                            Policy.</span>
+                    </label>
+
+                    <button type="submit" class="primary-btn">
+                        Complete Registration
+                    </button>
+                </form>
+
+                <div class="switch-link">
+                    Already have an account?
+                    <a href="#" id="showLoginFromSignup">Sign in here</a>
+                </div>
+            </div>
+
+            <!-- 3. FORGOT PASSWORD VIEW -->
+            <div id="forgotPasswordView" class="hidden">
+                <div class="form-heading">
+                    <h2>Reset Your Password</h2>
+                    <p>Enter your registered work email to receive password reset instructions.</p>
+                </div>
+
+                <form id="forgotPasswordForm">
+                    <div class="form-group">
+                        <label for="resetEmail">Registered Work Email</label>
+                        <input type="email" id="resetEmail" placeholder="name@company.com" required>
+                        <small id="resetEmailMsg"></small>
+                    </div>
+
+                    <button type="submit" class="primary-btn" style="margin-top: 10px;">
+                        Send Reset Instructions
+                    </button>
+                </form>
+
+                <div class="switch-link" style="margin-top: 25px;">
+                    Remembered your password?
+                    <a href="#" id="showLoginFromForgot">Back to Sign In</a>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="js/auth.js"></script>
+    <script>
+        // Elements
+        const loginView = document.getElementById("loginView");
+        const signupView = document.getElementById("signupView");
+        const forgotPasswordView = document.getElementById("forgotPasswordView");
+        const alertBox = document.getElementById("alertBox");
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        function showAlert(msg, isSuccess = false) {
+            alertBox.textContent = msg;
+            alertBox.className = "alert-box " + (isSuccess ? "alert-success" : "alert-error");
+            alertBox.classList.remove("hidden");
+        }
+
+        function hideAlert() {
+            alertBox.classList.add("hidden");
+        }
+
+        function switchView(viewToShow) {
+            hideAlert();
+            loginView.classList.add("hidden");
+            signupView.classList.add("hidden");
+            forgotPasswordView.classList.add("hidden");
+            viewToShow.classList.remove("hidden");
+        }
+        function validateFullName() {
+
+            const nameField =
+                document.getElementById("fullName");
+
+            const msg =
+                document.getElementById("nameValidationMsg");
+
+            let name = nameField.value;
+
+            name = name.replace(/\s{2,}/g, " ");
+            nameField.value = name;
+
+            const regex = /^[A-Za-z]+(?: [A-Za-z]+)*$/;
+
+            if (name.length === 0) {
+                msg.textContent = "";
+                return false;
+            }
+
+            if (name !== name.trim()) {
+                msg.style.color = "red";
+                msg.textContent =
+                    "Leading or trailing spaces are not allowed";
+                return false;
+            }
+
+            if (name.length < 3) {
+                msg.style.color = "red";
+                msg.textContent =
+                    "Minimum 3 characters required";
+                return false;
+            }
+
+            if (name.length > 100) {
+                msg.style.color = "red";
+                msg.textContent =
+                    "Maximum 100 characters allowed";
+                return false;
+            }
+
+            if (!regex.test(name)) {
+                msg.style.color = "red";
+                msg.textContent =
+                    "Only alphabets and single spaces allowed";
+                return false;
+            }
+
+            msg.style.color = "green";
+            msg.textContent = "✓ Valid Name";
+
+            return true;
+        }
+        function validateEmail(emailId, msgId) {
+
+            const email =
+                document.getElementById(emailId)
+                    .value.trim();
+
+            const msg =
+                document.getElementById(msgId);
+
+            if (email.length === 0) {
+                msg.innerHTML = "";
+                return false;
+            }
+
+            if (!emailRegex.test(email)) {
+
+                msg.style.color = "red";
+                msg.innerHTML =
+                    "Invalid email address";
+
+                return false;
+            }
+
+            msg.style.color = "green";
+            msg.innerHTML =
+                "✓ Valid email";
+
+            return true;
+        }
+        function updateRule(id, valid) {
+
+            const ele =
+                document.getElementById(id);
+
+            ele.style.color =
+                valid ? "green" : "red";
+        }
+        function validatePasswordLive() {
+
+            const pwd =
+                document.getElementById(
+                    "signupPassword"
+                ).value;
+
+            const length =
+                pwd.length >= 8;
+
+            const upper =
+                /[A-Z]/.test(pwd);
+
+            const lower =
+                /[a-z]/.test(pwd);
+
+            const number =
+                /\d/.test(pwd);
+
+            const special =
+                /[@$!%*?&]/.test(pwd);
+
+            updateRule("ruleLength", length);
+            updateRule("ruleUpper", upper);
+            updateRule("ruleLower", lower);
+            updateRule("ruleNumber", number);
+            updateRule("ruleSpecial", special);
+
+            return (
+                length &&
+                upper &&
+                lower &&
+                number &&
+                special
+            );
+        }
+        function validateConfirmPassword() {
+
+            const password =
+                document.getElementById(
+                    "signupPassword"
+                ).value;
+
+            const confirm =
+                document.getElementById(
+                    "confirmPassword"
+                ).value;
+
+            const msg =
+                document.getElementById(
+                    "confirmPasswordMsg"
+                );
+
+            if (confirm.length === 0) {
+
+                msg.innerHTML = "";
+
+                return false;
+            }
+
+            if (confirm !== password) {
+
+                msg.style.color = "red";
+                msg.innerHTML =
+                    "Passwords do not match";
+
+                return false;
+            }
+
+            msg.style.color = "green";
+            msg.innerHTML =
+                "✓ Passwords matched";
+
+            return true;
+        }
+        // View Navigation
+        document.getElementById("showSignup").addEventListener("click", (e) => {
+            e.preventDefault();
+            switchView(signupView);
+        });
+
+        document.getElementById("showLoginFromSignup").addEventListener("click", (e) => {
+            e.preventDefault();
+            switchView(loginView);
+        });
+
+        document.getElementById("showForgotPassword").addEventListener("click", (e) => {
+            e.preventDefault();
+            switchView(forgotPasswordView);
+        });
+
+        document.getElementById("showLoginFromForgot").addEventListener("click", (e) => {
+            e.preventDefault();
+            switchView(loginView);
+        });
+
+        // Password Toggle
+        const togglePasswordBtn = document.getElementById("togglePasswordBtn");
+        const loginPassword = document.getElementById("loginPassword");
+        togglePasswordBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            if (loginPassword.type === "password") {
+                loginPassword.type = "text";
+                togglePasswordBtn.textContent = "Hide";
+            } else {
+                loginPassword.type = "password";
+                togglePasswordBtn.textContent = "Show";
+            }
+        });
+
+        // Handle Login Submit
+        document.getElementById("loginForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            hideAlert();
+
+            const email = document.getElementById("loginEmail").value.trim();
+            const pass = document.getElementById("loginPassword").value;
+            if (!email) {
+                showAlert("Email address is required.");
+                return;
+            }
+
+            if (
+                !validateEmail(
+                    "loginEmail",
+                    "loginEmailMsg"
+                )
+            ) {
+                return;
+            }
+
+            if (!pass) {
+                showAlert("Password is required.");
+                return;
+            }
+
+
+            // const remember = document.getElementById("rememberMe").checked;
+            const res = Auth.login(email, pass, true);
+            if (res.success) {
+                showAlert("Signed in successfully. Redirecting to your workspace...", true);
+                setTimeout(() => {
+                    window.location.replace("app.html");
+                }, 600);
+            } else {
+                showAlert(res.error, false);
+            }
+        });
+
+        // Handle Signup Submit
+        document.getElementById("signupForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            hideAlert();
+
+            const name = document.getElementById("fullName").value.trim();
+            const email = document.getElementById("signupEmail").value.trim();
+            const password = document.getElementById("signupPassword").value;
+            if (
+                !validateFullName() ||
+                !validateEmail(
+                    "signupEmail",
+                    "emailValidationMsg"
+                ) ||
+                !validatePasswordLive() ||
+                !validateConfirmPassword()
+            ) {
+
+                showAlert(
+                    "Please fix all validation errors."
+                );
+
+                return;
+            }
+
+            const newUser = Auth.signup(name, email, password);
+            console.log("A");
+            // App.showToast('sign up is successfull', 'success');
+            console.log("B");
+            alert("sign up is successfull");
+            setTimeout(() => {
+                console.log("C");
+                window.location.replace("auth.html");;
+            }, 6000);
+        });
+
+        // Handle Forgot Password Submit
+        document.getElementById("forgotPasswordForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const email = document.getElementById("resetEmail").value.trim();
+
+
+            if (!email) {
+                showAlert("Email address is required.");
+                return;
+            }
+
+            if (
+                !validateEmail(
+                    "resetEmail",
+                    "resetEmailMsg"
+                )
+            ) {
+                return;
+            }
+
+            showAlert(`Password reset instructions have been dispatched to ${email}.`, true);
+            setTimeout(() => {
+                switchView(loginView);
+                document.getElementById("loginEmail").value = email;
+            }, 2200);
+        });
+        document
+            .getElementById("fullName")
+            .addEventListener(
+                "input",
+                validateFullName
+            );
+
+        document
+            .getElementById("signupEmail")
+            .addEventListener("input", () =>
+                validateEmail(
+                    "signupEmail",
+                    "emailValidationMsg"
+                )
+            );
+
+        document
+            .getElementById("signupPassword")
+            .addEventListener(
+                "input",
+                validatePasswordLive
+            );
+
+        document
+            .getElementById("confirmPassword")
+            .addEventListener(
+                "input",
+                validateConfirmPassword
+            );
+
+        document
+            .getElementById("loginEmail")
+            .addEventListener("input", () =>
+                validateEmail(
+                    "loginEmail",
+                    "loginEmailMsg"
+                )
+            );
+        document
+            .getElementById("resetEmail")
+            .addEventListener("input", () =>
+                validateEmail(
+                    "resetEmail",
+                    "resetEmailMsg"
+                )
+            );
+        // Check if already logged in
+        const existing = Auth.getCurrentUser();
+        if (existing) {
+            // Pre-fill email for convenience
+            document.getElementById("loginEmail").value = existing.email;
+        }
+
+        // Check URL parameter and open correct view
+        const params = new URLSearchParams(window.location.search);
+        const view = params.get("view");
+
+
+        if (view === "signup") {
+            switchView(signupView);
+        }
+    </script>
+
+</body>
+
+</html>

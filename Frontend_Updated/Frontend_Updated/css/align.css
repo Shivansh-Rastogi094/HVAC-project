@@ -1,0 +1,41 @@
+/* Alignment helper styles for the demo UI */
+
+/* Form groups – label on top, input full width */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+.form-group label {
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: var(--text-main);
+}
+.form-group input,
+.form-group select {
+  padding: 8px 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+}
+
+/* Sidebar link alignment – flex with icons */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  color: #cbd5e1;
+  text-decoration: none;
+}
+.sidebar-link.active,
+.sidebar-link:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+/* General page container spacing */
+.page {
+  padding: 24px;
+}
+
